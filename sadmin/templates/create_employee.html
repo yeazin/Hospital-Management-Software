@@ -1,0 +1,18 @@
+{% extends 'base/dashboard_base.html' %}
+
+{% block title %} Create Employee {% endblock %}
+
+{% block body %}
+
+
+<div class="container"> 
+    <div class="row">
+    <div class="col-md">
+    {{ forms }}
+    {% csrf_token %}
+    <br>
+    <button type="button" class="btn btn-primary btn-lg btn-block">Add Employee</button>
+</div>
+</div>
+</div>
+{% endblock %}

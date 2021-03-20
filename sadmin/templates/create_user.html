@@ -1,0 +1,29 @@
+{% extends 'base/dashboard_base.html' %}
+
+{% block title %} Create User {% endblock %}
+
+{% block body %}
+<div class="container"> 
+    <div class="row">
+    <div class="col-md-10 mx-auto">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+        <label for="userid">Username</label>    
+        <input type="text"  class ='form-control' id="userid" name='username' placeholder="Type the Username">
+        </div>
+        <div class="form-group">
+        <label for="emailid">Email Address</label>
+        <input type="email" class="form-control" name="email" id="emailid" placeholder="Type Your Email">
+        </div>
+        <div class="form-group">
+        <label for="passid">Password</label>
+        <input type = "password" class ="form-control" id="passid" name='password' placeholder="Type Your Password">
+        </div>
+        <br>
+        <button type="button" class="btn btn-primary btn-lg btn-block">Add User</button>
+    </form>
+    </div>
+    </div>
+    </div>
+{% endblock %}

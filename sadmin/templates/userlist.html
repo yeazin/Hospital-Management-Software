@@ -1,0 +1,37 @@
+{% extends 'base/dashboard_base.html' %}
+
+{% block title %} User List {% endblock %}
+{% block custom_css %}
+    h2{
+        text-align:center;
+    }
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="container ">
+        
+        <div class="row ">
+            <div class="col-md-10 mx-auto">
+                <h2 > User List </h2>
+        <table class="table table-striped">
+            {% for u in users %}
+            <tr>
+                <td> </td>
+                <td>{{ u.username }} </td>
+                <td>{{ u.email }}</td>
+                
+                <td> <a href="{% url 'delete_user' u.id %}"> Delete User</a></td>
+            </tr>
+            {% empty %}
+            <h2> Sorry No degree to show </h2>
+            {% endfor %}
+         
+            </table>
+        
+        </div>
+        </div>
+        </div>
+
+{% endblock %}

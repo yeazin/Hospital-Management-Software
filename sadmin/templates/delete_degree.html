@@ -1,0 +1,28 @@
+{% extends 'base/dashboard_base.html' %}
+
+{% block title %} Create Degree {% endblock %}
+{% block custom_css %}
+a{
+    tex-decoration:none;
+    color:white;
+}
+a:hover{
+    color:white;
+}
+{% endblock %}
+{% block body %}
+<div class="container"> 
+    <div class="row">
+    <div class="col-md-10 mx-auto">
+    <form action="" method="POST">
+        <div class='form-group'>
+        {% csrf_token %}
+       <p> Are You sure you want to delete ? <h6>{{ degree }} </h6>  </p> 
+    </div>
+    <button type="button" class="btn btn-primary btn-lg"><a href="{% url 'degreelist' %}">No Take me Back</a> </button>
+    <button type="Submit" class="btn btn-danger btn-lg ">Yes I`m sure to Delete this Degree</button>
+    </form>
+    </div>
+    </div>
+    </div>
+{% endblock %}

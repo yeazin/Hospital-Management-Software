@@ -1,0 +1,28 @@
+{% extends 'base/dashboard_base.html' %}
+
+{% block title %} Degree Lists {% endblock %}
+
+{% block body %}
+<div class="container ">
+<div class="row ">
+	<div class="col-md-10 mx-auto">
+
+<table class="table table-striped">
+    {% for d in degree %}
+    <tr>
+        <td> </td>
+        <td>{{ d }} </td>
+        <td><a href="{% url 'edit_degree' d.id %}">Edit</a>  </td>
+        <td> <a href="{% url 'delete_degree' d.id %}"> Delete</a></td>
+    </tr>
+    {% empty %}
+    <h2> Sorry No degree to show </h2>
+    {% endfor %}
+ 
+    </table>
+
+</div>
+</div>
+</div>
+  
+{% endblock %}
