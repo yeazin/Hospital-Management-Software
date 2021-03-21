@@ -4,16 +4,227 @@
 Dashboard Main
 
 {% endblock %}
+{% block custom_css %}
+
+.background {
+    background: rgb(34,193,195);
+    background: linear-gradient(72deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 81%);
+    border-radius:10px;
+    text-align:center;
+    box-shadow: 5px 5px 20px 1px #d0cdcd;
+    
+
+}
+h2{
+    color:white;
+    font-weight:bolder;
+    font-size:50px;
+    margin:0 auto;
+    
+}
+.background-1 {
+    background: rgb(63,94,251);
+    background: linear-gradient(41deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+    border-radius:10px;
+    text-align:center;
+    box-shadow: 5px 5px 20px 1px #d0cdcd;
+    
+
+}
+.background-2{
+    background: rgb(131,58,180);
+    background: linear-gradient(47deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    border-radius:10px;
+    text-align:center;
+    box-shadow: 5px 5px 20px 1px #d0cdcd;
+}
+.background-3{
+    background: rgb(11,78,244);
+    background: linear-gradient(39deg, rgba(11,78,244,1) 27%, rgba(237,242,8,1) 92%);
+    border-radius:10px;
+    text-align:center;
+    box-shadow: 5px 5px 20px 1px #d0cdcd;
+}
+.background:hover{
+    box-shadow: 10px 7px 20px 1px #a09d9d;
+}
+.background-1:hover{
+    box-shadow: 10px 7px 20px 1px #a09d9d;
+}
+.background-2:hover{
+    box-shadow: 10px 7px 20px 1px #a09d9d;
+}
+.background-3:hover{
+    box-shadow: 10px 7px 20px 1px #a09d9d;
+}
+h4{
+    color:white;
+    font-weight:bolder;
+}
+.div{
+    margin:6px;
+    display:inline-block;
+    width:23%;
+    margin:0 auto;
+}
+.recent{
+    width:48%;
+    background:white;
+    height:auto;
+    margin:30px auto;
+    margin-bottom:0px;
+    border-radius:15px;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 10%);
+    padding: 25px 35px;
+    
+    
+}
+.recent button{
+    width:50%;
+    margin:0 auto;
+    padding:5px 10px;
+    border-radius:10px;
+    background: rgb(63,94,251);
+    background: linear-gradient(41deg, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+    border:none;
+    box-shadow: 5px 5px 20px 1px #d0cdcd;
+    margin-top:10px;
+
+
+    
+    
+}
+
+.recent button a{
+    
+    color:white;
+    text-decoration:none;
+
+}
+.recent h5 a {
+    color:black;
+}
+@media screen and (max-width: 992px){
+    .div{
+        width: 48%;
+        margin:2px 2px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .div {
+      width: 100%;
+    }
+      h2{
+        color:white;
+        font-weight:bolder;
+        font-size:35px;
+        margin:0 auto;
+        
+    }
+    .recent{
+        width:98%;
+        align-items:center;
+
+    }
+  }
+
+{% endblock %}
 {% block body %}
-    
-<div class="container ">    
-    <div class="row ">
-        <div class="col-md-12 mx-auto">
-            <div 
+<div class="container">
+    <div class="row g-2">
+      <div class=" div">
+        <div class="p-3  background ">
+            <h4>Total Users</h4>
+            <h2>{{user_count }}</h2>
+        </div>
+      </div>
+
+      <div class="div ">
+        <div class="p-3  background-1 ">
+            <h4>Total Doctors</h4>
+            <h2>{{ doctor_count }}</h2>
+        </div>
+      </div>
+
+      <div class="div ">
+        <div class="p-3  background-2 ">
+            <h4>Total Patients</h4>
+            <h2>{{ patient_count }}</h2>
+        </div>
+      </div>
+
+      <div class="div ">
+        <div class="p-3  background-3 ">
+            <h4>Total Employees</h4>
+            <h2>{{ employee_count }}</h2>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+        <div class="recent">
+            <h3> Recent Doctors </h3>
+            <hr>
+            {% for d in doctor %}
+             <h5> <i class="fas fa-user-md"></i> <a href="{% url 'doctor' d.id %}">{{ d.name }} | {{ d.contact }}</a></h5> 
+            {% empty %}
+            <h5>Sorry! No Doctor to Show </h5>
+            {% endfor %}
+            {% if doctor %}
+            <button  ><a href="{% url 'doctorlist' %}"> View All Doctors</a> </button>
+            {% else %}
+            {% endif %}
+        </div>
+
+        <div class="recent">
+            <h3> Recent Patients </h3>
+            <hr>
+            {% for d in patient %}
+             <h5> <i class="far fa-plus-square"></i> <a href="{% url 'patient' d.id %}">{{ d.patient_name }} | {{ d.gender }} | {{ d.phone}}</a></h5> 
+            {% empty %}
+            <h5>Sorry! No Patient to Show </h5>
+            {% endfor %}
+            {% if patient %}
+            <button  ><a href="{% url 'patient_list' %}"> View All Patients</a> </button>
+            {% else %}
+            {% endif %}
+
+        </div>
+
+        <div class="recent">
+            <h3> Recent Employees </h3>
+            <hr>
+            {% for d in employee  %}
+             <h5> <i class="fas fa-users"></i> <a href="#">{{ d.name }} | {{ d.contact }} | {{ d.status }}</a></h5> 
+            {% empty %}
+            <h5>Sorry! No Employee to Show </h5>
+            {% endfor %}
+            {% if employee %}
+            <button ><a href=""> View All Employees</a> </button>
+            {% else %}
+            {% endif %}
+            
+
+        </div>
+
+        <div class="recent">
+            <h3> Recent Users </h3>
+            <hr>
+            {% for d in user  %}
+             <h5> <i class="fa fa-user"></i><a href="#"> {{ d.username }} | {{ d.email }}</a></h5> 
+            {% empty %}
+            <h5>Sorry! No User to Show </h5>
+            {% endfor %}
+            {% if user %}
+            <button ><a href="{% url 'userlist' %}"> View All Users</a> </button>
+            {% else %}
+            {% endif %}
+
+        </div>
+    </div>
 
 
-            </div>
-            </div>
-            </div>
-    
+
+  </div>
 {% endblock %}

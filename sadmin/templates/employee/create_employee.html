@@ -8,10 +8,12 @@
 <div class="container"> 
     <div class="row">
     <div class="col-md">
+        <form action="" method="POST">
     {{ forms }}
     {% csrf_token %}
     <br>
-    <button type="button" class="btn btn-primary btn-lg btn-block">Add Employee</button>
+    <button type="submit" class="btn btn-primary btn-lg btn-block">Add Employee</button>
+    </form>
 </div>
 </div>
 </div>
