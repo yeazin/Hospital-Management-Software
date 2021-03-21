@@ -1,0 +1,67 @@
+{% extends 'base/dashboard_base.html' %}
+
+{% block title %} User List {% endblock %}
+{% block custom_css %}
+    h2{
+        text-align:center;
+    }
+   button  a{
+        tex-decoration:none;
+        color:white;
+    }
+    button a:hover{
+        color:white;
+    }
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="container ">
+        
+        <div class="row ">
+            <div class="col-md-10 mx-auto">
+
+                <div class="row">
+                    <div class="col">
+                        <h2 > User List </h2>
+                    </div>
+  
+                    <div class="col col-lg-2">
+                        <button type="button" class="btn btn-primary btn-sm"><a href="{% url 'user_create' %}"> Add User </a> </button>
+                    </div>
+                  </div>
+                
+
+        <table class="table table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <td> </td>
+                    <td> UserName </td>
+                    <td>Email</td>
+                    <td> Delete Items</td>
+                </tr>
+            </thead>
+           
+            <tbody>
+                {% for u in users %}
+            <tr>
+                <td> </td>
+                <td>{{ u.username }} </td>
+                <td>{{ u.email }}</td>
+                
+                <td> <a href="{% url 'delete_user' u.id %}"> Delete User</a></td>
+            </tr>
+            {% empty %}
+            </tbody>
+            
+            <h2> Sorry No degree to show </h2>
+            {% endfor %}
+         
+            </table>
+        
+        </div>
+        </div>
+        </div>
+
+{% endblock %}

@@ -1,11 +1,34 @@
 {% extends 'base/dashboard_base.html' %}
 
 {% block title %} Degree Lists {% endblock %}
+{% block custom_css %}
+    h2{
+        text-align:center;
+    }
+   button  a{
+        tex-decoration:none;
+        color:white;
+    }
+    button a:hover{
+        color:white;
+    }
+{% endblock %}
 
 {% block body %}
 <div class="container ">
 <div class="row ">
 	<div class="col-md-10 mx-auto">
+
+        <div class="row">
+            <div class="col">
+                <h2 > Degree List </h2>
+            </div>
+
+            <div class="col col-lg-2">
+                <button type="button" class="btn btn-primary btn-sm"><a href="{% url 'degree_create' %}"> Add Degree </a> </button>
+            </div>
+          </div>
+        
 
 <table class="table table-striped">
     {% for d in degree %}

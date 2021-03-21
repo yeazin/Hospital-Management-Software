@@ -1,0 +1,77 @@
+{% extends 'base/dashboard_base.html' %}
+
+{% block title %} Patient List {% endblock %}
+{% block custom_css %}
+    h2{
+        text-align:center;
+    }
+   button a{
+        tex-decoration:none;
+        color:white;
+    }
+   button  a:hover{
+        color:white;
+    }
+
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="container ">
+        
+        <div class="row ">
+            <div class="col-md-12 mx-auto">
+
+
+                <div class="row">
+                    <div class="col">
+                        <h2 > Patient List </h2>
+                    </div>
+  
+                    <div class="col col-lg-2">
+                        <button type="button" class="btn btn-primary btn-sm"><a href="{% url 'create_patient' %}"> Add Patient </a> </button>
+                    </div>
+                  </div>
+                
+
+        <table class="table table-striped">
+            <thead class="thead-light">
+                <tr>
+                    
+                    <td> Patient Name </td>
+                    <td>Gender</td>
+                    <td> Bed No</td>
+                    <td> Phone</td>
+                    <td> Assign Doctor </td>
+                    <td> View Patient </td>
+                    <td> Delete patient </td>
+                </tr>
+            </thead>
+           
+            <tbody>
+                {% for l in plist %}
+            <tr>
+                
+                <td>{{ l.patient_name }} </td>
+                <td>{{ l.gender }}</td>
+                <td>{{ l.bed_no }}</td>
+                <td> {{ l.phone }}</td>
+                <td> {{ l.assign_doctor }}</td>
+                
+                <td> <a href="{% url 'patient' l.id %}"> View Patient</a></td>
+                <td> <a href="{% url 'delete_patient' l.id %}"> Delete Patient</a></td>
+            </tr>
+            {% empty %}
+            </tbody>
+            
+            <h2> Sorry No Patients to show </h2>
+            {% endfor %}
+         
+            </table>
+        
+        </div>
+        </div>
+        </div>
+
+{% endblock %}

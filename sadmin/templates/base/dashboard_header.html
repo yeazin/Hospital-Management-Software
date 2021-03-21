@@ -1,7 +1,7 @@
 
 <nav class="navbar navbar-expand navbar-dark bg-primary">
     <a class="sidebar-toggle mr-3" href="#"><i class="fa fa-bars"></i></a>
-    <a class="navbar-brand" href="#">Hospital Management System </a>
+    <a class="navbar-brand" href="{% url 'dashboard' %}">Hospital Management System </a>
 
     <div class="navbar-collapse collapse">
         <ul class="navbar-nav ml-auto">
@@ -46,15 +46,24 @@
                     <i class="fas fa-user-md"></i> Doctors 
                 </a>
                 <ul id="sm_expand_2" class="list-unstyled collapse">
-                    <li><a href="#">Doctor`s List</a></li>
+                    <li><a href="{% url 'doctorlist' %}">Doctor`s List</a></li>
                     <li><a href="{% url 'doctor_create' %}"> Add New Doctor</a></li>
                 </ul>
             </li>
             <li>
                 <a href="#sm_expand_3" data-toggle="collapse">
-                    <i class="fas fa-users"></i> Employee
+                    <i class="far fa-plus-square"></i> Patients
                 </a>
                 <ul id="sm_expand_3" class="list-unstyled collapse">
+                    <li><a href="{% url 'patient_list' %}">Patient`s List</a></li>
+                    <li><a href="{% url 'create_patient' %}"> Add New Patient</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#sm_expand_4" data-toggle="collapse">
+                    <i class="fas fa-users"></i> Employee
+                </a>
+                <ul id="sm_expand_4" class="list-unstyled collapse">
                     <li><a href="#">Employee List</a></li>
                     <li><a href="{% url 'create'%}"> Add New Employee</a></li>
                 </ul>

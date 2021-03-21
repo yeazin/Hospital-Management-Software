@@ -1,0 +1,77 @@
+{% extends 'base/dashboard_base.html' %}
+
+{% block title %} User List {% endblock %}
+{% block custom_css %}
+    h2{
+        text-align:center;
+    }
+   button a{
+        tex-decoration:none;
+        color:white;
+    }
+   button  a:hover{
+        color:white;
+    }
+
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="container ">
+        
+        <div class="row ">
+            <div class="col-md-12 mx-auto">
+
+
+                <div class="row">
+                    <div class="col">
+                        <h2 > Doctor List </h2>
+                    </div>
+  
+                    <div class="col col-lg-2">
+                        <button type="button" class="btn btn-primary btn-sm"><a href="{% url 'doctor_create' %}"> Add Doctor </a> </button>
+                    </div>
+                  </div>
+                
+
+        <table class="table table-striped">
+            <thead class="thead-light">
+                <tr>
+                    
+                    <td> UserName </td>
+                    <td>Email</td>
+                    <td> Name </td>
+                    <td> Contact </td>
+                    <td> User Create </td>
+                    <td> View Doctor </td>
+                    <td> Delete Items</td>
+                </tr>
+            </thead>
+           
+            <tbody>
+                {% for l in list %}
+            <tr>
+                
+                <td>{{ l.user.username }} </td>
+                <td>{{ l.email }}</td>
+                <td>{{ l.name }}</td>
+                <td> {{ l.contact }}</td>
+                
+                <td> {{ l.created_at }}</td>
+                <td> <a href=""> View Doctor</a></td>
+                <td> <a href="{% url 'delete_doctor' l.id %}"> Delete User</a></td>
+            </tr>
+            {% empty %}
+            </tbody>
+            
+            <h2> Sorry No Doctors to show </h2>
+            {% endfor %}
+         
+            </table>
+        
+        </div>
+        </div>
+        </div>
+
+{% endblock %}

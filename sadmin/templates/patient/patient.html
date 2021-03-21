@@ -1,0 +1,25 @@
+{% extends 'base/dashboard_base.html' %}
+{% block title %} {{p.patient_name }} {% endblock %}
+{% block body %} 
+
+    <div class="container"> 
+    <div class="row">
+    <div class="col-md-10 mx-auto">
+        <h2>{{ p.patient_name }}</h2>
+        {% if p.month and p.age %}
+        <h4> Age            :   {{ p.age }} years  {{p.month}} months</h4>
+        {% elif p.age %}
+        <h4> Age            :   {{ p.age }} years</h4>
+        {% elif p.month %}
+        <h4> Age            :   {{ p.month }} months</h4>
+        {% endif %}  
+        <h4>Gender          :   {{ p.gender }}</h4>
+        <h4>Phone           :   {{p.phone }}</h4>
+        <h4>Bed No          :   {{p.bed_no}}</h4>
+        <h4>Admitted in     :   {{ p.admit_date}}</h4>
+
+    </div>
+    </div>
+    </div>
+
+{% endblock %}
