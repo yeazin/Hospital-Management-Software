@@ -1,7 +1,7 @@
 from django import forms
-from .models import Employee_Profile, Doctor_Profile, Degree,Patient
+from .models import Employee_Profile, Doctor_Profile, Degree,Patient,Package, Department
 
-
+# Employee forms
 class Employee_Profile_Forms(forms.ModelForm):
     class Meta:
         model = Employee_Profile
@@ -21,7 +21,7 @@ class Employee_Profile_Forms(forms.ModelForm):
 class Doctor_Profile_Forms(forms.ModelForm):
     class Meta:
         model = Doctor_Profile
-        fields = ['user', 'name','contact','address','degree']
+        fields = ['user', 'name','contact','address','degree','department']
         widgets = {
             'user':forms.Select(attrs={'class':'form-control'}),
             'name':forms.TextInput(attrs={'class':'form-control'}),
@@ -32,6 +32,8 @@ class Doctor_Profile_Forms(forms.ModelForm):
 
         }
 
+# Degree forms
+
 class Degree_Form(forms.ModelForm):
     class Meta:
         model = Degree
@@ -40,6 +42,7 @@ class Degree_Form(forms.ModelForm):
             'name':forms.TextInput(attrs={'class':'form-control'})
         }
 
+# Patient Forms
 
 class Patient_Form(forms.ModelForm):
     class Meta:
@@ -78,6 +81,31 @@ class Patient_Form(forms.ModelForm):
 
 
         }
+
+# package form 
+
+class Package_Form(forms.ModelForm):
+    class Meta:
+        model = Package
+
+        #price = forms.IntegerField()
+        #price.widget.attrs.update({'class':'form-control','placeholder':'Package Price'})
+        fields = ['name', 'detail','price']
+        widgets = {
+            'name':forms.TextInput(attrs={'class':'form-control','placeholder':'Package Name'}),
+            'detail':forms.Textarea(attrs={'class':'form-control','placeholder':'Package Details'}),
+            'price':forms.NumberInput(attrs={'class':'form-control','placeholder':'Package Details'})
+            
+        }
+
+# Department Form
+
+class Department_Form(forms.ModelForm):
+    class Meta:
+        model = Department
+        name = forms.CharField()
+        name.widget.attrs.update({'class':'form-control','placeholder':'Department Name'})
+        fields = ['name']
 
 
 

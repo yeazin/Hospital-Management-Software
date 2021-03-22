@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Employee_Profile, Degree, Doctor_Profile, Patient
+from .models import Employee_Profile, Degree, Doctor_Profile, Patient,Department, Package
 
 
 class Employee_Profile_Admin(admin.ModelAdmin):
@@ -10,6 +10,15 @@ class Employee_Profile_Admin(admin.ModelAdmin):
 admin.site.register(Employee_Profile, Employee_Profile_Admin)
 
 admin.site.register(Degree)
+admin.site.register(Department)
+
+class Package_Admin(admin.ModelAdmin):
+    list_display = ('name','price')
+    ordering = ['-created_at']
+    
+
+
+admin.site.register(Package, Package_Admin)
 
 class Doctor_Profile_Admin(admin.ModelAdmin):
     list_display = ('name', 'email','contact','created_at')
@@ -24,3 +33,4 @@ class Patient_Admin(admin.ModelAdmin):
     search_fields = ('patient_name', 'bed_no','phone','gender')
 
 admin.site.register(Patient, Patient_Admin)
+

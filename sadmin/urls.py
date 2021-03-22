@@ -29,6 +29,11 @@ urlpatterns = [
    path('patient/<str:pk>', views.PatientSingleView, name = 'patient'),
    # Employee Path 
    path('create_employee/', views.EmployeeCreate, name ='create'),
+   # packages Path
+   path('create_package/', views.PackageCreateView, name='create_package'),
+   path('package_list/', views.PackageListView, name = 'packagelist'),
+   # pdf view path
+   path('package_list/<str:pk>', views.PackagePdfView, name='pdf'),
 
 
 ]

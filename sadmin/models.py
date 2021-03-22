@@ -27,12 +27,19 @@ class Employee_Profile(models.Model):
     def __str__(self):
         return self.name 
 
-
+# Degree Model
 class Degree(models.Model):
     name        =   models.CharField(max_length=200, blank=False)
 
     def __str__(self):
         return self.name
+
+# Doctor Department Model
+class Department(models.Model):
+    name        =   models.CharField(max_length=200, blank=False, null=True)
+
+    def __str__(self):
+        return self.name 
 
 
 # doctor profile model 
@@ -42,6 +49,7 @@ class Doctor_Profile(models.Model):
     name        =   models.CharField(max_length=200, blank=False)
     email       =   models.EmailField(null=True,blank=True)
     address     =   models.TextField(max_length=300, blank=True)
+    department  =   models.ForeignKey(Department, on_delete=models.DO_NOTHING, null=True, related_name='department')
     degree      =   models.ManyToManyField(Degree, related_name='degree')
     contact     =   models.CharField(max_length=11,blank=False)
     created_at  =   models.DateTimeField(auto_now_add=True)
@@ -53,6 +61,20 @@ class Doctor_Profile(models.Model):
     def __str__(self):
         return self.name 
     
+# Package class Model
+
+class Package(models.Model):
+    name        =   models.CharField(max_length=200,verbose_name='Package Name')
+    detail      =   models.TextField(max_length=400, blank=True, verbose_name='Package details')
+    price       =   models.IntegerField(verbose_name='Package Price', default="00")
+    created_at  =   models.DateTimeField(auto_now_add=True)
+    updated_at  =   models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural =" Packages "
 
 
 # Patient Model  
@@ -76,6 +98,7 @@ class Patient(models.Model):
     patient_mother_name =   models.CharField(max_length=100, verbose_name='Mother`s Name')
     guardian_name       =   models.CharField(max_length=100, blank=True, verbose_name='Guardian Name')
     guardian_phone_no   =   models.CharField(max_length=11, blank=True, verbose_name='Guardian`s Phone Number')
+    is_leave            =   models.BooleanField(default=False)
 
     def __str__(self):
         return self.patient_name 

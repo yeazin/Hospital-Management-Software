@@ -1,13 +1,16 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import Employee_Profile_Forms, Degree_Form, Doctor_Profile_Forms,Patient_Form
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
-from .models import Degree, Doctor_Profile, Employee_Profile, Patient
+from .models import Degree, Doctor_Profile, Employee_Profile, Patient, Package, Department
+from .forms import Employee_Profile_Forms, Degree_Form, Doctor_Profile_Forms,Patient_Form, Package_Form, Department_Form
+# for pff import 
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 
-
+######################################## Home, Dashboard , admin login functions views #############
 # HomeView 
 def HomeView(request):
 
@@ -68,6 +71,61 @@ def DashboardView(request):
 def Logout_User(request):
     logout(request)
     return redirect('/')
+
+####################################### Packages View functions ###############################
+
+# Create Package functions 
+@login_required
+def PackageCreateView(request):
+    if request.user.is_authenticated:
+        form = Package_Form()
+        if request.method == "POST":
+            form = Package_Form(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('packagelist')
+            else:
+                form = Package_Form()
+    else:
+        return redirect('login')
+    context = {'form':form}
+    return render(request, 'package/create_package.html', context)
+
+# for showing list of packages
+@login_required
+def PackageListView(request):
+    packages = Package.objects.all().order_by('-id') 
+    
+    context = {'packages': packages}
+    return render (request, 'package/package_list.html', context)
+
+
+
+
+
+
+ ############ packages PDF view Functions ###########
+
+def PackagePdfView(request, pk):
+    template_path = 'pdf/packagepdf.html'
+    p = Package.objects.get(id=pk)
+    context = {'p': p}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+       html, dest=response)
+    # if error then show some funy view
+    if pisa_status.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+
+
 
 ######################################### Employee`s view Functions #########################
 

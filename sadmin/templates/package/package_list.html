@@ -1,0 +1,6 @@
+{% extends 'base/dashboard_base.html' %}
+{% block body %}
+    {% for p in packages %}
+        {{ p.name }}
+    {% endfor %}
+{% endblock %}
