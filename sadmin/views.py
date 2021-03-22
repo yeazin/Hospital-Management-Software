@@ -10,7 +10,7 @@ from .forms import Employee_Profile_Forms, Degree_Form, Doctor_Profile_Forms,Pat
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 
-######################################## Home, Dashboard , admin login functions views #############
+
 # HomeView 
 def HomeView(request):
 
@@ -72,7 +72,7 @@ def Logout_User(request):
     logout(request)
     return redirect('/')
 
-####################################### Packages View functions ###############################
+
 
 # Create Package functions 
 @login_required
