@@ -2,6 +2,46 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+# Income model
+
+class IncomeModel(models.Model):
+    name   =   models.CharField(max_length=200, blank=False, null=True, verbose_name='Income Name')
+    amount =   models.IntegerField(verbose_name='Amount')
+    date    =   models.DateField(blank=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Income Detail'
+
+# Expenses Model 
+
+class ExpenseModel(models.Model):
+    name    =   models.CharField(max_length=200, blank=False, null=True, verbose_name='Expenses Name')
+    amount  =   models.IntegerField(verbose_name='Amount')
+    date    =   models.DateField(blank=True)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = "Expense Detail"
+
+# Home rent model
+
+class HomeRent(models.Model):
+    month       =   models.DateField(auto_now_add=False, verbose_name='Month`s Name')
+    paid_by     =   models.CharField(max_length=200, blank=False, null=True, verbose_name='Paid By')
+    paid_to     =   models.CharField(max_length=200, blank=True, null=True, verbose_name='Paid To')
+    amount      =   models.IntegerField(verbose_name='Total Amount')
+    is_paid     =   models.BooleanField(default=False, verbose_name='Paid or Not')
+
+    def __str__(self):
+        return self.paid_by
+
+    class Meta:
+        verbose_name = "Rent Cost Per Month"
 
 # Employee Model
 

@@ -9,14 +9,16 @@ from .forms import Employee_Profile_Forms, Degree_Form, Doctor_Profile_Forms,Pat
 # for pff import 
 from django.template.loader import get_template
 from xhtml2pdf import pisa
+from django.views import View
 
 
 # HomeView 
-def HomeView(request):
-
+class HomeView(View):
+    def get(self, request,*args, **kwargs):
+        context ={}
+        return render (request, 'home/index.html', context)
         
-    context ={}
-    return render (request, 'home/index.html', context)
+
 
 
 # User Login View 
@@ -65,6 +67,7 @@ def DashboardView(request):
         'employee':employee,
         'patient':patient
                 }
+                
     return render(request, 'home/dashboard.html', context)
 
 
@@ -73,6 +76,8 @@ def Logout_User(request):
     return redirect('/')
 
 
+ 
+# packages views - create-update-single-list-delete-pdf
 
 # Create Package functions 
 @login_required
@@ -102,9 +107,7 @@ def PackageListView(request):
 
 
 
-
-
- ############ packages PDF view Functions ###########
+# pdf views
 
 def PackagePdfView(request, pk):
     template_path = 'pdf/packagepdf.html'
@@ -127,7 +130,7 @@ def PackagePdfView(request, pk):
 
 
 
-######################################### Employee`s view Functions #########################
+# Employee Views - create-update-delete-single-list
 
 # Employee Create View 
 @login_required
@@ -200,7 +203,7 @@ def UserDeleteView(request, pk):
     context = {'user':user}
     return render(request,'user/delete_user.html', context)
 
-############################## Doctor`s Views Function ##########################
+# Doctor views - create-update-delete-list-single
 # doctor create View
 
 @login_required
@@ -246,8 +249,7 @@ def DoctorDeleteView(request, pk):
     return render (request, 'doctor/delete_doctor.html', context)
 
 
-
-############################## Degree`s Views Function ##########################
+# Degree views -create-update-delete-single-list
 # Creating Degree
 @login_required
 def DegreeCreateView(request):
@@ -298,7 +300,7 @@ def DeleteDegreeView(request, pk):
     return render (request, 'degree/delete_degree.html', context)
 
 
-########################### Patient Views Functions ######################
+# Patient Views
 
 # for creating Patient 
 @login_required
