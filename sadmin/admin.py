@@ -1,5 +1,9 @@
 from django.contrib import admin
-from .models import Employee_Profile, Degree, Doctor_Profile, Patient,Department, Package, HomeRent,IncomeModel, ExpenseModel
+from .models import ( Employee_Profile,
+                    Degree, Doctor_Profile, 
+                    Patient,Department, Package, 
+                    HomeRent,IncomeModel, ExpenseModel,
+                    DoctorSalary, EmployeeSalary )
 
 
 class Employee_Profile_Admin(admin.ModelAdmin):
@@ -40,14 +44,32 @@ admin.site.register(HomeRent, HomeRent_Admin)
 class IncomeModel_Admin(admin.ModelAdmin):
     list_display=('name', 'amount')
     search_fields = ('name','amount', 'date')
+    ordering = ['-id']
 
 admin.site.register(IncomeModel,IncomeModel_Admin)
 
 class ExpenseModel_Admin(admin.ModelAdmin):
     list_display=('name', 'amount')
     search_fields = ('name','amount', 'date')
+    ordering = ['-id']
 
 admin.site.register(ExpenseModel, ExpenseModel_Admin)
+
+class DoctorSalary_Admin(admin.ModelAdmin):
+    list_display = ('doctor','salary','is_paid')
+    search_fields = ('doctor','salary','is_paid')
+    ordering = ['-id']
+
+admin.site.register(DoctorSalary,DoctorSalary_Admin)
+
+class EmployeeSalary_Admin(admin.ModelAdmin):
+    list_display = ('employee','salary','is_paid')
+    search_fields = ('employee','salary','is_paid')
+    ordering = ['-id']   
+
+admin.site.register(EmployeeSalary,EmployeeSalary_Admin)
+
+
 
 
 

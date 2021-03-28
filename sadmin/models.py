@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+
+
+
 # Income model
 
 class IncomeModel(models.Model):
@@ -67,6 +70,18 @@ class Employee_Profile(models.Model):
     def __str__(self):
         return self.name 
 
+# Employee Salary 
+class EmployeeSalary(models.Model):
+    employee        =   models.ForeignKey(Employee_Profile, on_delete=models.DO_NOTHING, verbose_name='Employee')
+    salary          =   models.IntegerField(verbose_name='Salary Payable')
+    date            =   models.DateField(verbose_name='Salaray Date', blank=True)
+    is_paid         =   models.BooleanField(default=False, verbose_name='paid Salary')
+
+
+
+    class Meta:
+        verbose_name = 'Employee Salary'
+
 # Degree Model
 class Degree(models.Model):
     name        =   models.CharField(max_length=200, blank=False)
@@ -87,6 +102,7 @@ class Department(models.Model):
 class Doctor_Profile(models.Model):
     user        =   models.ForeignKey(User, on_delete=models.DO_NOTHING)
     name        =   models.CharField(max_length=200, blank=False)
+    designation =   models.CharField(max_length=200, verbose_name='Designation',blank=True, null=True)
     email       =   models.EmailField(null=True,blank=True)
     address     =   models.TextField(max_length=300, blank=True)
     department  =   models.ForeignKey(Department, on_delete=models.DO_NOTHING, null=True, related_name='department')
@@ -100,6 +116,21 @@ class Doctor_Profile(models.Model):
         
     def __str__(self):
         return self.name 
+
+# Doctor Salary
+class DoctorSalary(models.Model):
+    doctor      =   models.ForeignKey(Doctor_Profile, on_delete=models.DO_NOTHING, verbose_name='Doctor')
+    salary      =   models.IntegerField(verbose_name='Salary Payable')
+    date        =   models.DateField(blank=True,verbose_name='Salary Date')
+    is_paid     =   models.BooleanField(default=False, verbose_name='Paid Salary')
+
+
+    
+    class Meta:
+        verbose_name = 'Doctor Salary'
+
+
+
     
 # Package class Model
 
@@ -138,7 +169,7 @@ class Patient(models.Model):
     patient_mother_name =   models.CharField(max_length=100, verbose_name='Mother`s Name')
     guardian_name       =   models.CharField(max_length=100, blank=True, verbose_name='Guardian Name')
     guardian_phone_no   =   models.CharField(max_length=11, blank=True, verbose_name='Guardian`s Phone Number')
-    is_leave            =   models.BooleanField(default=False)
+    is_leave            =   models.BooleanField(default=False, verbose_name='Leave Patient')
 
     def __str__(self):
         return self.patient_name 
