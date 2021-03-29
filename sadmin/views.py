@@ -11,6 +11,12 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.views import View
 
+class MainView(View):
+    def get(self, request, *args, **kwargs):
+        context = {}
+        return render (request,'home/main.html', context )
+
+
 
 # HomeView 
 class HomeView(View):

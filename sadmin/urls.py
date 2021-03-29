@@ -36,4 +36,7 @@ urlpatterns = [
    path('package_list/<str:pk>', views.PackagePdfView, name='pdf'),
 
 
+   path('main', views.MainView.as_view(), name='main')
+
+
 ]

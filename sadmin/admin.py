@@ -3,8 +3,10 @@ from .models import ( Employee_Profile,
                     Degree, Doctor_Profile, 
                     Patient,Department, Package, 
                     HomeRent,IncomeModel, ExpenseModel,
-                    DoctorSalary, EmployeeSalary )
+                    DoctorSalary, EmployeeSalary,
+                    Appointment,Doctor_Patient_Count )
 
+admin.site.site_header = 'Hospital Management Software'
 
 class Employee_Profile_Admin(admin.ModelAdmin):
     list_display = ('name', 'email', 'status','contact')
@@ -69,6 +71,13 @@ class EmployeeSalary_Admin(admin.ModelAdmin):
 
 admin.site.register(EmployeeSalary,EmployeeSalary_Admin)
 
+class Appointment_Admin(admin.ModelAdmin):
+    list_display = ('doctor','date','visit','visit_type','patient')
+    ordering = ['-id']
+    
+
+admin.site.register(Appointment, Appointment_Admin)
+admin.site.register(Doctor_Patient_Count)
 
 
 

@@ -77,7 +77,8 @@ class EmployeeSalary(models.Model):
     date            =   models.DateField(verbose_name='Salaray Date', blank=True)
     is_paid         =   models.BooleanField(default=False, verbose_name='paid Salary')
 
-
+    def __str__(self):
+        return f"{self.employee} | {self.salary}" 
 
     class Meta:
         verbose_name = 'Employee Salary'
@@ -124,12 +125,11 @@ class DoctorSalary(models.Model):
     date        =   models.DateField(blank=True,verbose_name='Salary Date')
     is_paid     =   models.BooleanField(default=False, verbose_name='Paid Salary')
 
-
+    def __str__(self):
+        return f"{self.doctor} | {self.salary}" 
     
     class Meta:
         verbose_name = 'Doctor Salary'
-
-
 
     
 # Package class Model
@@ -177,10 +177,31 @@ class Patient(models.Model):
     class Meta:
         verbose_name_plural = "Patients"
 
+# Doctor Appointment Model
+class Appointment(models.Model):
+    status = (
+        ('New Visit','New Visit'),
+        ('Renew Visit', 'Renew Visit')
+    )
+    doctor      =   models.ForeignKey(Doctor_Profile, on_delete=models.DO_NOTHING, verbose_name='Doctor Name')
+    patient     =   models.ForeignKey(Patient, on_delete=models.DO_NOTHING, verbose_name='Patient Name', null=True)
+    visit_type  =   models.CharField(max_length=20,blank=False,null=True,verbose_name='Visit Type', choices=status)
+    ref         =   models.CharField(max_length=100,blank=True, null=True)
+    date        =   models.DateTimeField(auto_now_add=False, verbose_name='Appointment Date')
+    visit       =   models.BooleanField(default=False, verbose_name='Finished Appointment')
 
+    def __str__(self):
+        return f"{self.doctor} | {self.date}"
 
+class Doctor_Patient_Count(models.Model):
+    doctor          =   models.ForeignKey(Doctor_Profile, on_delete=models.DO_NOTHING, verbose_name='Doctor Name')
+    #total_count     =   models.IntegerField(verbose_name='Total Patient')
+    date            =   models.DateTimeField(auto_now_add=False,verbose_name='Visited Date')
 
+    def __str__(self):
+        return f"{self.doctor} | {self.total_count}"
 
-
-
+    class Meta:
+        verbose_name = 'Doctor`s total Patient visit'
+        verbose_name_plural = 'Doctor`s total Patient visit'
 
