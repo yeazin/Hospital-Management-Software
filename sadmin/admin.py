@@ -4,10 +4,10 @@ from .models import ( Employee_Profile,
                     Patient,Department, Package, 
                     HomeRent,IncomeModel, ExpenseModel,
                     DoctorSalary, EmployeeSalary,
-                    Appointment,Doctor_Patient_Count )
+                    Appointment) 
 
 admin.site.site_header = 'Hospital Management Software'
-
+# Employee Admin
 class Employee_Profile_Admin(admin.ModelAdmin):
     list_display = ('name', 'email', 'status','contact')
     ordering = ['-created_at']
@@ -15,7 +15,9 @@ class Employee_Profile_Admin(admin.ModelAdmin):
 
 admin.site.register(Employee_Profile, Employee_Profile_Admin)
 
+# Degree Admin
 admin.site.register(Degree)
+# Department Admin
 admin.site.register(Department)
 
 class Package_Admin(admin.ModelAdmin):
@@ -77,7 +79,7 @@ class Appointment_Admin(admin.ModelAdmin):
     
 
 admin.site.register(Appointment, Appointment_Admin)
-admin.site.register(Doctor_Patient_Count)
+#admin.site.register(Doctor_Patient_Count)
 
 
 

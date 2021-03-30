@@ -39,7 +39,7 @@ class HomeRent(models.Model):
     paid_to     =   models.CharField(max_length=200, blank=True, null=True, verbose_name='Paid To')
     amount      =   models.IntegerField(verbose_name='Total Amount')
     is_paid     =   models.BooleanField(default=False, verbose_name='Paid or Not')
-
+    
     def __str__(self):
         return self.paid_by
 
@@ -108,15 +108,18 @@ class Doctor_Profile(models.Model):
     address     =   models.TextField(max_length=300, blank=True)
     department  =   models.ForeignKey(Department, on_delete=models.DO_NOTHING, null=True, related_name='department')
     degree      =   models.ManyToManyField(Degree, related_name='degree')
+    #appointment =   models.ForeignKey(add,on_delete=models.DO_NOTHING, null=True, verbose_name='Appoinments')
     contact     =   models.CharField(max_length=11,blank=False)
     created_at  =   models.DateTimeField(auto_now_add=True)
     updated_at  =   models.DateTimeField(auto_now=True)
+    is_approved =   models.BooleanField(default=False, verbose_name='Approve status')
 
     class Meta:
         verbose_name_plural =  "Doctor`s Profile"
         
     def __str__(self):
         return self.name 
+
 
 # Doctor Salary
 class DoctorSalary(models.Model):
@@ -186,22 +189,14 @@ class Appointment(models.Model):
     doctor      =   models.ForeignKey(Doctor_Profile, on_delete=models.DO_NOTHING, verbose_name='Doctor Name')
     patient     =   models.ForeignKey(Patient, on_delete=models.DO_NOTHING, verbose_name='Patient Name', null=True)
     visit_type  =   models.CharField(max_length=20,blank=False,null=True,verbose_name='Visit Type', choices=status)
-    ref         =   models.CharField(max_length=100,blank=True, null=True)
+    ref         =   models.CharField(max_length=100,blank=True, null=True, verbose_name='Reference By')
     date        =   models.DateTimeField(auto_now_add=False, verbose_name='Appointment Date')
     visit       =   models.BooleanField(default=False, verbose_name='Finished Appointment')
 
     def __str__(self):
         return f"{self.doctor} | {self.date}"
 
-class Doctor_Patient_Count(models.Model):
-    doctor          =   models.ForeignKey(Doctor_Profile, on_delete=models.DO_NOTHING, verbose_name='Doctor Name')
-    #total_count     =   models.IntegerField(verbose_name='Total Patient')
-    date            =   models.DateTimeField(auto_now_add=False,verbose_name='Visited Date')
+    
+        
 
-    def __str__(self):
-        return f"{self.doctor} | {self.total_count}"
-
-    class Meta:
-        verbose_name = 'Doctor`s total Patient visit'
-        verbose_name_plural = 'Doctor`s total Patient visit'
 

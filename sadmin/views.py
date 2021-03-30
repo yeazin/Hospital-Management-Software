@@ -17,16 +17,12 @@ class MainView(View):
         return render (request,'home/main.html', context )
 
 
-
 # HomeView 
 class HomeView(View):
     def get(self, request,*args, **kwargs):
         context ={}
         return render (request, 'home/index.html', context)
         
-
-
-
 # User Login View 
 def LoginView(request):
     if request.user.is_authenticated:
@@ -157,7 +153,7 @@ def EmployeeCreate(request):
 @login_required
 
 
-############################### User views functions ########################
+# ------------------ User functions view ---------------
 
 # User create View
 @login_required
@@ -368,24 +364,3 @@ def PatientSingleView(request, pk):
     p = Patient.objects.get(id = pk )
     context = {"p":p}
     return render (request,'patient/patient.html', context)
-
-
-
-    
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-        
