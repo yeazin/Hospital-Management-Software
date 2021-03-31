@@ -59,8 +59,8 @@
                 <td> {{ l.contact }}</td>
                 
                 <td> {{ l.created_at }}</td>
-                <td> <a href=""> View Doctor</a></td>
-                <td> <a href="{% url 'delete_doctor' l.id %}"> Delete User</a></td>
+                <td> <a href=""> <i title="View Doctor" class="fas fa-eye"></i></a></td>
+                <td> <a href="{% url 'delete_doctor' l.id %}"> <i title= "Delete Doctor" class="fas fa-trash-alt"></i></a></td>
             </tr>
             {% empty %}
             </tbody>

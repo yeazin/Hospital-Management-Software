@@ -1,4 +1,4 @@
-
+from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 from . import views 
 
@@ -30,13 +30,13 @@ urlpatterns = [
    # Employee Path 
    path('create_employee/', views.EmployeeCreate, name ='create'),
    # packages Path
-   path('create_package/', views.PackageCreateView, name='create_package'),
-   path('package_list/', views.PackageListView, name = 'packagelist'),
+   path('create_package/', login_required(login_url='login')(views.PackageCreateView.as_view()), name='create_package'),
+   path('package_list/',login_required(login_url='login') (views.PackageListView.as_view()), name = 'packagelist'),
    # pdf view path
    path('package_list/<str:pk>', views.PackagePdfView, name='pdf'),
 
 
-   path('main', views.MainView.as_view(), name='main')
+   
 
 
 ]

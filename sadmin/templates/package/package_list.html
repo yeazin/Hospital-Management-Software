@@ -1,6 +1,52 @@
 {% extends 'base/dashboard_base.html' %}
+
+{% block title %} Degree Lists {% endblock %}
+{% block custom_css %}
+    h2{
+        text-align:center;
+    }
+   button  a{
+        tex-decoration:none;
+        color:white;
+    }
+    button a:hover{
+        color:white;
+    }
+{% endblock %}
+
 {% block body %}
-    {% for p in packages %}
-        {{ p.name }}
+<div class="container ">
+<div class="row ">
+	<div class="col-md-10 mx-auto">
+
+        <div class="row">
+            <div class="col">
+                <h2 > Packages List </h2>
+            </div>
+
+            <div class="col col-lg-2">
+                <button type="button" class="btn btn-primary btn-sm"><a href="{% url 'create_package' %}"> Add Package </a> </button>
+            </div>
+          </div>
+        
+
+<table class="table table-striped">
+    {% for ps in packages %}
+    <tr>
+        <td> </td>
+        <td><strong>{{ ps.name }}</strong> </td>
+        <td><a href=""><i class="fas fa-eye"></i> View Now</a>  </td>
+        <td><a href= ""> <i class="fas fa-print"></i> Print Now</a></td>
+        <td> <a href=""><i  class="fas fa-trash-alt"></i> Delete</a></td>
+    </tr>
+    {% empty %}
+    <h2> Sorry No Package to show Now </h2>
     {% endfor %}
+ 
+    </table>
+
+</div>
+</div>
+</div>
+  
 {% endblock %}

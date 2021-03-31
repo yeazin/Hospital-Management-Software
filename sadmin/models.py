@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
-
-
 # Income model
 
 class IncomeModel(models.Model):

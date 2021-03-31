@@ -1,15 +1,34 @@
 {% extends 'base/dashboard_base.html' %}
-{% block title %} Create Doctor {% endblock %}
+{% block title %} Create Package {% endblock %}
 {% block body %} 
 
     <div class="container"> 
     <div class="row">
     <div class="col-md-10 mx-auto">
+        {% for m in messages %}
+        <div class='alert alert-danger' role="alert">
+            {{ m }}
+        </div> 
+        {% endfor %}
     <form action="" method="POST">
-    {{ form }}
+    <div class="form-group">
+        <label for="pname"> Package Name</label>
+        <input type="text" id ="pname" name='name' class='form-control' placeholder="Type the Package Name">
+    </div>
+    <div class="form-group">
+    <label for="pdetail"> Details of Package</label>
+    <textarea class="form-control" id="pdetail" name='des' rows="5" placeholder="Package Details"></textarea>
+    </div>
+    <div class="form-group">
+    <label for="p_price"> Price of Package</label>
+    <input type="number" id="p_price" name='price' class='form-control' placeholder="Package Price">
+    </div>
+
     {% csrf_token %}
+    
     <br>
-    <button type="submit" class="btn btn-primary btn-lg btn-block">Add Package</button>
+    <button type="submit" class="btn btn-dark btn-lg ">Add Package</button>
+    <button type="submit" value=True name='continue' class="btn btn-primary btn-lg ">Add Package and Continue</button>
     </form>
     </div>
     </div>

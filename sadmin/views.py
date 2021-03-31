@@ -11,11 +11,6 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.views import View
 
-class MainView(View):
-    def get(self, request, *args, **kwargs):
-        context = {}
-        return render (request,'home/main.html', context )
-
 
 # HomeView 
 class HomeView(View):
@@ -42,7 +37,7 @@ def LoginView(request):
     return render (request, 'home/login.html', context)
 
 # Admin dashboard Views 
-@login_required
+@login_required (login_url='login')
 def DashboardView(request):
     if request.user.is_authenticated:
         user = request.user
@@ -82,54 +77,59 @@ def Logout_User(request):
 # packages views - create-update-single-list-delete-pdf
 
 # Create Package functions 
-@login_required
-def PackageCreateView(request):
-    if request.user.is_authenticated:
-        form = Package_Form()
-        if request.method == "POST":
-            form = Package_Form(request.POST)
-            if form.is_valid():
-                form.save()
-                return redirect('packagelist')
+class PackageCreateView(View):
+
+    def get(self,request,*args,**kwargs):
+        return render(request,'package/create_package.html')
+    
+    def post(self,request,*args,**kwargs):
+        if request.user.is_authenticated:
+            if request.method == 'POST':
+                data = request.POST
+                name = data.get('name')
+                detail = data.get('des')
+                price = data.get('price')
+                fname = Package.objects.all().filter(name=name)
+                if fname:
+                    messages.info (request,'sorry name already exits')
+                    return redirect ('create_package')
+                elif request.POST.get ('continue') :
+                    pac = Package(name=name, detail=detail, price=price)
+                    pac.save()
+                    return redirect('create_package')
+                else:
+                    pac = Package(name=name, detail=detail, price=price)
+                    pac.save()
+                    return redirect('packagelist') 
             else:
-                form = Package_Form()
-    else:
-        return redirect('login')
-    context = {'form':form}
-    return render(request, 'package/create_package.html', context)
+                return redirect ('create_package')    
+        else:
+            return redirect('login')
+        
 
 # for showing list of packages
-@login_required
-def PackageListView(request):
-    packages = Package.objects.all().order_by('-id') 
+class PackageListView(View):
     
-    context = {'packages': packages}
-    return render (request, 'package/package_list.html', context)
-
-
+    def get(self, request,*args, **kwargs):
+        packages = Package.objects.all().order_by('-id')
+        context = {'packages':packages }
+        return render (request,'package/package_list.html', context)
+        
 
 
 # pdf views
-
 def PackagePdfView(request, pk):
     template_path = 'pdf/packagepdf.html'
     p = Package.objects.get(id=pk)
     context = {'p': p}
-    # Create a Django response object, and specify content_type as pdf
     response = HttpResponse(content_type='application/pdf')
-    
-    # find the template and render it.
     template = get_template(template_path)
     html = template.render(context)
-
-    # create a pdf
     pisa_status = pisa.CreatePDF(
        html, dest=response)
-    # if error then show some funy view
     if pisa_status.err:
        return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
-
 
 
 # Employee Views - create-update-delete-single-list
