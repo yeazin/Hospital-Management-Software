@@ -36,36 +36,38 @@ def LoginView(request):
     context ={}
     return render (request, 'home/login.html', context)
 
-# Admin dashboard Views 
-@login_required (login_url='login')
-def DashboardView(request):
-    if request.user.is_authenticated:
-        user = request.user
-        # query 
-        doctor = Doctor_Profile.objects.all().order_by('-id')[:4]
-        user = User.objects.all().order_by('-id')[:4]
-        employee = Employee_Profile.objects.all().order_by('-id')[:4]
-        patient = Patient.objects.all().order_by('-id')[:4]
-        #count
-        doctor_count = Doctor_Profile.objects.all().count()
-        user_count   = User.objects.all().count()
-        employee_count  = Employee_Profile.objects.all().count()
-        patient_count   = Patient.objects.all().count()
-    else:
-        return redirect('login')
-    context = {
-        'user':user,
-        'doctor_count':doctor_count,
-        'user_count': user_count,
-        'employee_count':employee_count,
-        'patient_count':patient_count,
-        'doctor':doctor,
-        'user':user,
-        'employee':employee,
-        'patient':patient
-                }
-                
-    return render(request, 'home/dashboard.html', context)
+#### admin dashboard views
+class DashboardView(View):
+    
+    def get(self,request,*args,**kwargs):
+
+        if request.user.is_authenticated:
+            user = request.user
+            # query 
+            doctor = Doctor_Profile.objects.all().order_by('-id')[:4]
+            user = User.objects.all().order_by('-id')[:4]
+            employee = Employee_Profile.objects.all().order_by('-id')[:4]
+            patient = Patient.objects.all().order_by('-id')[:4]
+            #count
+            doctor_count = Doctor_Profile.objects.all().count()
+            user_count   = User.objects.all().count()
+            employee_count  = Employee_Profile.objects.all().count()
+            patient_count   = Patient.objects.all().count()
+        else:
+            return redirect('login')
+        context = {
+            'user':user,
+            'doctor_count':doctor_count,
+            'user_count': user_count,
+            'employee_count':employee_count,
+            'patient_count':patient_count,
+            'doctor':doctor,
+            'user':user,
+            'employee':employee,
+            'patient':patient
+                    }
+                    
+        return render(request, 'home/dashboard.html', context)
 
 
 def Logout_User(request):
@@ -74,7 +76,7 @@ def Logout_User(request):
 
 
  
-# packages views - create-update-single-list-delete-pdf
+#  --------- packages views - create-update-single-list-delete-pdf
 
 # Create Package functions 
 class PackageCreateView(View):

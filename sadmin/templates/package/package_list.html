@@ -36,7 +36,7 @@
         <td> </td>
         <td><strong>{{ ps.name }}</strong> </td>
         <td><a href=""><i class="fas fa-eye"></i> View Now</a>  </td>
-        <td><a href= ""> <i class="fas fa-print"></i> Print Now</a></td>
+        <td><a href= "{% url 'pdf' ps.id %}" target="_blank"> <i class="fas fa-print"></i> Print Now</a></td>
         <td> <a href=""><i  class="fas fa-trash-alt"></i> Delete</a></td>
     </tr>
     {% empty %}
