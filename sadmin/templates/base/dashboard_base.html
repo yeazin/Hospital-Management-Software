@@ -1,32 +1,75 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %} {% endblock %}</title>
+  <style> {% block custom_css %} {% endblock %}</style>
 
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
-    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css'%}">
-    <link rel="stylesheet" href="{% static 'css/bootadmin.min.css'%}">
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
 
-    <title>{% block title %} Dashboard {% endblock %}</title>
-    <style>{% block custom_css %}  {% endblock %}</style>
-</head>
-<body class="bg-light">
-
-    {% include 'base/dashboard_header.html '%}
-
-    <div class="content p-4">
-        {% block body %}
+  <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
   
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'css/adminlte.min.css' %}">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
 
-        {% endblock %}
+
+
+{% include 'base/dashboard_header.html' %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          
+      {% block body %}
+    <div class="container">
+      <h1> Hi there bro</h1>
     </div>
+     {% endblock %}
+
+
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+  
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+    <div class="float-right d-none d-sm-inline">
+      Anything you want
+    </div>
+    <!-- Default to the left -->
+    All rights reserved.
+  </footer>
 </div>
+<!-- ./wrapper -->
 
-<script src="{%static 'js/jquery.min.js'%}"></script>
-<script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>
-<script src="{% static 'js/bootadmin.min.js' %}"></script>
+<!-- REQUIRED SCRIPTS -->
 
+<!-- jQuery -->
+<script src="https://kit.fontawesome.com/1666a7bc46.js" crossorigin="anonymous"></script>
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.min.js' %}"></script>
 </body>
 </html>

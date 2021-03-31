@@ -1,74 +1,285 @@
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{% url 'dashboard' %}" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+      </li>
+    </ul>
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Navbar Search -->
+      <li class="nav-item">
+        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+          <i class="fas fa-search"></i>
+        </a>
+        <div class="navbar-search-block">
+          <form class="form-inline">
+            <div class="input-group input-group-sm">
+              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </li>
 
-<nav class="navbar navbar-expand navbar-dark bg-primary">
-    <a class="sidebar-toggle mr-3" href="#"><i class="fa fa-bars"></i></a>
-    <a class="navbar-brand" href="{% url 'dashboard' %}">Hospital Management System </a>
 
-    <div class="navbar-collapse collapse">
-        <ul class="navbar-nav ml-auto">
+
+
+   
+      <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <!-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
+      <span class="brand-text font-weight-light">AdminLTE 3</span>
+    </a>
+
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="" class="img-circle elevation-2" alt="User Image">
+          </div>
+          <div class="info">
+            <a href="#" class="d-block">Alexander Pierce</a>
+          </div>
+        </div>
   
-            <li class="nav-item dropdown">
-                <a href="#" id="dd_user" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ user.username }}</a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd_user">
-                    
-                    <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
-                </div>
+  
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+                 with font-awesome or any other icon font library -->
+                 <li class="nav-item"><a href="{% url 'dashboard' %}" class="nav-link">
+                   <i class="nav-icon fas fa-tachometer-alt"></i>
+                   <p>Dashboard</p>
+                  </a>
+                </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link ">
+                <i class="fas fa-user-md"></i>
+                <p>
+                  Doctors
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{% url 'doctor_create' %}" class="nav-link ">
+                    <i class="fas fa-plus-square"></i>
+                    <p>Create Doctors</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'doctorlist' %}" class="nav-link">
+                    <i class="fas fa-folder"></i>
+                    <p>All Doctors</p>
+                  </a>
+                </li>
+              </ul>
             </li>
-        </ul>
-    </div>
-</nav>
-
-<div class="d-flex">
-    <div class="sidebar sidebar-dark bg-dark">
-        <ul class="list-unstyled">
-            <li><a href="{% url 'dashboard' %}"><i class="fab fa-uncharted"></i> Dashboard</a></li>
-           
-            <li>
-                <a href="#sm_expand_0" data-toggle="collapse">
-                    <i class="fas fa-certificate"></i> Degrees
-                </a>
-                <ul id="sm_expand_0" class="list-unstyled collapse">
-                    <li><a href="{% url 'degreelist' %}">All Degree List</a></li>
-                    <li><a href="{% url 'degree_create'%}"> Add New Degree</a></li>
-                </ul>
+  
+            <li class="nav-item  ">
+              <a href="#" class="nav-link ">
+                <i class="fas fa-user-injured"></i>
+                <p>
+                  Patients
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{% url 'create_patient' %}" class="nav-link ">
+                    <i class="fas fa-plus-square"></i>
+                    <p>Create patient</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'patient_list' %}" class="nav-link">
+                    <i class="fas fa-folder"></i>
+                    <p>All patient</p>
+                  </a>
+                </li>
+              </ul>
             </li>
-
-            <li>
-                <a href="#sm_expand_1" data-toggle="collapse">
-                    <i class="fa fa-user"></i> Users 
-                </a>
-                <ul id="sm_expand_1" class="list-unstyled collapse">
-                    <li><a href="{% url 'userlist' %}">User List</a></li>
-                    <li><a href="{% url 'user_create'%}"> Add New User</a></li>
-                </ul>
+  
+            <li class="nav-item  ">
+              <a href="#" class="nav-link">
+                <i class="fas fa-hospital-user"></i>
+                <p>
+                  Employee
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{% url 'create'%}" class="nav-link ">
+                    <i class="fas fa-plus-square"></i>
+                    <p>Create Employee</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="fas fa-folder"></i>
+                    <p>All Employee</p>
+                  </a>
+                </li>
+              </ul>
             </li>
-
-            <li>
-                <a href="#sm_expand_2" data-toggle="collapse">
-                    <i class="fas fa-user-md"></i> Doctors 
-                </a>
-                <ul id="sm_expand_2" class="list-unstyled collapse">
-                    <li><a href="{% url 'doctorlist' %}">Doctor`s List</a></li>
-                    <li><a href="{% url 'doctor_create' %}"> Add New Doctor</a></li>
-                </ul>
+  
+  
+            <li class="nav-item  ">
+              <a href="#" class="nav-link">
+                <i class="fas fa-handshake"></i>
+                <p>
+                  Appointments
+                  
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="#" class="nav-link ">
+                    <i class="fas fa-plus-square"></i>
+                    <p>Create Appointments</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="fas fa-folder"></i>
+                    <p>All Appointments</p>
+  
+                  </a>
+                </li>
+              </ul>
             </li>
-            <li>
-                <a href="#sm_expand_3" data-toggle="collapse">
-                    <i class="far fa-plus-square"></i> Patients
-                </a>
-                <ul id="sm_expand_3" class="list-unstyled collapse">
-                    <li><a href="{% url 'patient_list' %}">Patient`s List</a></li>
-                    <li><a href="{% url 'create_patient' %}"> Add New Patient</a></li>
-                </ul>
+  
+            <li class="nav-item  ">
+              <a href="#" class="nav-link">
+                <i class="fas fa-copy"></i>
+                <p>
+                  Packages
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="#" class="nav-link ">
+                    <i class="fas fa-plus-square"></i>
+                    <p>Create Packages</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="fas fa-folder"></i>
+                    <p>All Packages</p>
+                  </a>
+                </li>
+              </ul>
             </li>
-            <li>
-                <a href="#sm_expand_4" data-toggle="collapse">
-                    <i class="fas fa-users"></i> Employee
-                </a>
-                <ul id="sm_expand_4" class="list-unstyled collapse">
-                    <li><a href="#">Employee List</a></li>
-                    <li><a href="{% url 'create'%}"> Add New Employee</a></li>
-                </ul>
+  
+            
+  
+            <li class="nav-item  ">
+              <a href="#" class="nav-link">
+                <i class="fas fa-cogs"></i>
+                <p>
+                  Settings
+                  <i class="right fas fa-angle-double-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="#" class="nav-link ">
+                    <i class="fas fa-archive"></i>
+                    <p>Departments</p>
+                    <i class=" right fas fa-angle-left"></i>
+                  </a>
+  
+                      <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                          <a href="#" class="nav-link ">
+                            <i class="fas fa-plus-square"></i>
+                            <p>Create Departments</p>
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="#" class="nav-link">
+                            <i class="fas fa-folder"></i>
+                            <p>All Departments</p>
+                          </a>
+                        </li>
+                      </ul>
+  
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="fas fa-certificate"></i>
+                    <p>Degrees</p>
+                    <i class=" right fas fa-angle-left"></i>
+                  </a>
+  
+                  <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="{% url 'degree_create'%}" class="nav-link ">
+                        <i class="fas fa-plus-square"></i>
+                        <p>Create Degree</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'degreelist' %}" class="nav-link">
+                        <i class="fas fa-folder"></i>
+                        <p>All Degrees</p>
+                      </a>
+                    </li>
+                  </ul>
+  
+  
+                </li>
+              </ul>
             </li>
-
-        </ul>
-    </div>
+  
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Simple Link
+                  <span class="right badge badge-danger">New</span>
+                </p>
+              </a>
+            </li>
+  
+  
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>
